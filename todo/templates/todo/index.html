@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for todo in todos %}
+    {% if todo.complete is False %}
+        <p><a href="{% url 'completeTodo' todo.id %}">{{ todo.text }}</a></p>
+    {% else %}
+        <p><strike><a href="{% url 'completeTodo' todo.id %}">{{ todo.text }}</a></strike></p>
+    {% endif %}
+{% endfor %}
+
+<form action="#" method="POST">
+    {% csrf_token %}
+    {{ form.text }}
+    <button type="submit">Submit</button>
+<br><br>
+    <a href="{% url 'deleteComplete' %}"><button type="button">Delete Complete</button></a>
+    <a href="{% url 'deleteAll' %}"><button type="button">Delete All</button></a>
+</form>
+
+</body>
+</html>
